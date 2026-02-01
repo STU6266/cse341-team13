@@ -4,7 +4,7 @@ const doc = {
   swagger: '2.0',
   info: {
     title: 'University Library Management API',
-    description: 'University Library Management API documentation',
+    description: 'Swagger documentation for the CSE 341 Final Project API.',
     version: '1.0.0'
   },
   schemes: ['https', 'http'],
