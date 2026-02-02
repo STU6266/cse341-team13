@@ -25,11 +25,12 @@ const getStudentById = async (req, res) => {
 const createStudent = async (req, res) => {
     //#swagger.tags = ['Students']  
     const student = {
+        studentNumber: req.body.studentNumber,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: new Date(req.body.birthday)
+        department: req.body.department,
+        isActive: req.body.isActive
     };
 
     const result = await mongodb
@@ -53,11 +54,12 @@ const updateStudent = async (req, res) => {
     }
     const student_id = new ObjectId(req.params.id);
     const student = {
+        studentNumber: req.body.studentNumber,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: new Date(req.body.birthday)
+        department: req.body.department,
+        isActive: req.body.isActive
     };
 
     const response = await mongodb

@@ -3,10 +3,13 @@ const validator = require('../helpers/validate');
 const saveBook = (req, res, next) => {
   const validationRule = {
     title: 'required|string',
-        author: 'required|string',
-        email: 'required|string',
-        favoriteColor: 'string',
-        birthday:'string'
+    author: 'required|string',
+    isbn: 'required|string',
+    category: 'required|string',
+    publicationYear: 'required|numeric',
+    totalCopies: 'required|numeric',
+    availableCopies: 'required|numeric',
+    shelfLocation: 'required|string'
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -22,11 +25,12 @@ const saveBook = (req, res, next) => {
 };
 const saveStudent = (req, res, next) => {
   const validationRule = {
-   firstName: 'required|string',
-        lastName: 'required|string',
-        email: 'required|string',
-        favoriteColor: 'string',
-        birthday:'string'
+    studentNumber: 'required|string',
+    firstName: 'required|string',
+    lastName: 'required|string',
+    email: 'required|email',
+    department: 'required|string',
+    isActive: 'required|boolean'
   };
 
   validator(req.body, validationRule, {}, (err, status) => {
@@ -65,8 +69,31 @@ const saveSchool = (req, res, next) => {
     next();
   });
 };
+
+const saveLoan = (req, res, next) => {
+  const validationRule = {
+    studentId: 'required|string',
+    bookId: 'required|string',
+    loanDate: 'required|date',
+    dueDate: 'required|date',
+    returnDate: 'date',
+    status: 'string'
+  };
+
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    }
+    next();
+  });
+};
 module.exports = {
   saveBook,
   saveStudent,
-  saveSchool
+  saveSchool,
+  saveLoan
 };

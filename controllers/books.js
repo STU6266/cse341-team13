@@ -27,9 +27,12 @@ const createBook = async (req, res) => {
     const book = {
         title: req.body.title,
         author: req.body.author,
-        email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: new Date(req.body.birthday)
+        isbn: req.body.isbn,
+        category: req.body.category,
+        publicationYear: req.body.publicationYear,
+        totalCopies: req.body.totalCopies,
+        availableCopies: req.body.availableCopies,
+        shelfLocation: req.body.shelfLocation
     };
 
     const result = await mongodb
@@ -55,9 +58,12 @@ const updateBook = async (req, res) => {
     const book = {
         title: req.body.title,
         author: req.body.author,
-        email: req.body.email,
-        favoriteColor: req.body.favoriteColor,
-        birthday: new Date(req.body.birthday)
+        isbn: req.body.isbn,
+        category: req.body.category,
+        publicationYear: req.body.publicationYear,
+        totalCopies: req.body.totalCopies,
+        availableCopies: req.body.availableCopies,
+        shelfLocation: req.body.shelfLocation
     };
 
     const response = await mongodb
