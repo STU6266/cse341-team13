@@ -1,0 +1,63 @@
+@baseUrl = http://localhost:3000
+@loanId = 69811ad214bfb769a47ae66a
+
+### Get all loans
+GET {{baseUrl}}/loans
+
+### Get loan by ID
+GET {{baseUrl}}/loans/{{loanId}}
+
+### Create loan 1
+POST {{baseUrl}}/loans
+Content-Type: application/json
+
+{
+  "studentId": "66c4a7c6f1c2a3b4c5d6e7f8",
+  "bookId": "66c4a7c6f1c2a3b4c5d6e7f9",
+  "loanDate": "2026-02-01",
+  "dueDate": "2026-02-15",
+  "returnDate": null,
+  "status": "checked_out"
+}
+
+### Create loan 2
+POST {{baseUrl}}/loans
+Content-Type: application/json
+
+{
+  "studentId": "66c4a7c6f1c2a3b4c5d6e7f8",
+  "bookId": "66c4a7c6f1c2a3b4c5d6e7f9",
+  "loanDate": "2026-02-01",
+  "dueDate": "2026-02-15",
+  "returnDate": null,
+  "status": "checked_out"
+}
+
+### Create loan 3
+POST {{baseUrl}}/loans
+Content-Type: application/json
+
+{
+  "studentId": "66c4a7c6f1c2a3b4c5d6e7f8",
+  "bookId": "66c4a7c6f1c2a3b4c5d6e7f9",
+  "loanDate": "2026-02-01",
+  "dueDate": "2026-02-15",
+  "returnDate": null,
+  "status": "checked_out"
+}
+
+### Update loan by id
+PUT {{baseUrl}}/loans/{{loanId}}
+Content-Type: application/json
+
+{
+  "studentId": "66c4a7c6f1c2a3b4c5d6e7f8",
+  "bookId": "66c4a7c6f1c2a3b4c5d6e7f9",
+  "loanDate": "2026-02-01",
+  "dueDate": "2026-02-15",
+  "returnDate": "2026-02-10",
+  "status": "returned"
+}
+
+### Delete loan by id
+DELETE {{baseUrl}}/loans/{{loanId}}

@@ -64,13 +64,22 @@
                 "author": {
                   "example": "any"
                 },
-                "email": {
+                "isbn": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "category": {
                   "example": "any"
                 },
-                "birthday": {
+                "publicationYear": {
+                  "example": "any"
+                },
+                "totalCopies": {
+                  "example": "any"
+                },
+                "availableCopies": {
+                  "example": "any"
+                },
+                "shelfLocation": {
                   "example": "any"
                 }
               }
@@ -140,13 +149,22 @@
                 "author": {
                   "example": "any"
                 },
-                "email": {
+                "isbn": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "category": {
                   "example": "any"
                 },
-                "birthday": {
+                "publicationYear": {
+                  "example": "any"
+                },
+                "totalCopies": {
+                  "example": "any"
+                },
+                "availableCopies": {
+                  "example": "any"
+                },
+                "shelfLocation": {
                   "example": "any"
                 }
               }
@@ -224,6 +242,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "studentNumber": {
+                  "example": "any"
+                },
                 "firstName": {
                   "example": "any"
                 },
@@ -233,10 +254,10 @@
                 "email": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "department": {
                   "example": "any"
                 },
-                "birthday": {
+                "isActive": {
                   "example": "any"
                 }
               }
@@ -300,6 +321,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "studentNumber": {
+                  "example": "any"
+                },
                 "firstName": {
                   "example": "any"
                 },
@@ -309,10 +333,10 @@
                 "email": {
                   "example": "any"
                 },
-                "favoriteColor": {
+                "department": {
                   "example": "any"
                 },
-                "birthday": {
+                "isActive": {
                   "example": "any"
                 }
               }
@@ -527,6 +551,178 @@
       "delete": {
         "tags": [
           "Schools"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/loans/": {
+      "get": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "example": "any"
+                },
+                "bookId": {
+                  "example": "any"
+                },
+                "loanDate": {
+                  "example": "any"
+                },
+                "dueDate": {
+                  "example": "any"
+                },
+                "returnDate": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          }
+        }
+      }
+    },
+    "/loans/{id}": {
+      "get": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "example": "any"
+                },
+                "bookId": {
+                  "example": "any"
+                },
+                "loanDate": {
+                  "example": "any"
+                },
+                "dueDate": {
+                  "example": "any"
+                },
+                "returnDate": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Loans"
         ],
         "description": "",
         "parameters": [

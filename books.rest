@@ -1,0 +1,56 @@
+@baseUrl = http://localhost:3000
+@bookId = 69811a04e7a9275dd1fe238f
+
+### Get all books
+GET {{baseUrl}}/books
+
+### Get book by ID
+GET {{baseUrl}}/books/{{bookId}}
+
+### Create book 1
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "isbn": "9780132350884",
+  "category": "Software Engineering",
+  "publicationYear": 2008,
+  "totalCopies": 5,
+  "availableCopies": 5,
+  "shelfLocation": "A3-14"
+}
+
+### Create book 2
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt, David Thomas",
+  "isbn": "9780201616224",
+  "category": "Software Engineering",
+  "publicationYear": 1999,
+  "totalCopies": 3,
+  "availableCopies": 2,
+  "shelfLocation": "A3-12"
+}
+
+### Update book by id
+PUT {{baseUrl}}/books/{{bookId}}
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Programmer (20th Anniversary Edition)",
+  "author": "Andrew Hunt, David Thomas",
+  "isbn": "9780135957059",
+  "category": "Software Engineering",
+  "publicationYear": 2019,
+  "totalCopies": 4,
+  "availableCopies": 4,
+  "shelfLocation": "A3-12"
+}
+
+### Delete book by id
+DELETE {{baseUrl}}/books/{{bookId}}

@@ -1,0 +1,50 @@
+@baseUrl = http://localhost:3000
+@studentId = 69811999e7a9275dd1fe238d
+
+### Get all students
+GET {{baseUrl}}/students
+
+### Get student by ID
+GET {{baseUrl}}/students/{{studentId}}
+
+### Create student 1
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+  "studentNumber": "S1234567",
+  "firstName": "Steven",
+  "lastName": "Kemendics",
+  "email": "steven@example.com",
+  "department": "Software Development",
+  "isActive": true
+}
+
+### Create student 2
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+  "studentNumber": "S7654321",
+  "firstName": "Jordan",
+  "lastName": "Lee",
+  "email": "jordan.lee@example.com",
+  "department": "Information Systems",
+  "isActive": true
+}
+
+### Update student by id
+PUT {{baseUrl}}/students/{{studentId}}
+Content-Type: application/json
+
+{
+  "studentNumber": "S7654321",
+  "firstName": "Jordan",
+  "lastName": "Lee",
+  "email": "jordan.lee@example.com",
+  "department": "Information Systems",
+  "isActive": false
+}
+
+### Delete student by id
+DELETE {{baseUrl}}/students/{{studentId}}
