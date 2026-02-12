@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const booksController = require('../controllers/books');
 const validation = require('../middleware/validate');
+const isAuthenticated = require('../middleware/authenticate');
 
 routes.get('/', async (req, res, next) => {
   try {
@@ -23,7 +24,7 @@ routes.get('/:id', async (req, res, next) => {
 
 
 routes.post(
-  '/',
+  '/', isAuthenticated,
   validation.saveBook,
   async (req, res, next) => {
     try {
@@ -36,7 +37,7 @@ routes.post(
 
 
 routes.put(
-  '/:id',
+  '/:id', isAuthenticated,
   validation.saveBook,
   async (req, res, next) => {
     try {
@@ -48,11 +49,14 @@ routes.put(
 );
 
 
-routes.delete('/:id', async (req, res, next) => {
-  try {
-    await booksController.deleteBook(req, res);
-  } catch (error) {
-    next(error);
+routes.delete('/:id', isAuthenticated,
+  async (req, res, next) => {
+    try {
+      await booksController.deleteBook(req, res);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
+
 module.exports = routes;
