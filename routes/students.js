@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const studentsController = require('../controllers/students');
 const validation = require('../middleware/validate');
+const isAuthenticated = require('../middleware/authenticate');
 
 
 routes.get('/', async (req, res, next) => {
@@ -25,6 +26,7 @@ routes.get('/:id', async (req, res, next) => {
 
 routes.post(
   '/',
+  isAuthenticated,
   validation.saveStudent,
   async (req, res, next) => {
     try {
@@ -38,6 +40,7 @@ routes.post(
 
 routes.put(
   '/:id',
+  isAuthenticated,
   validation.saveStudent,
   async (req, res, next) => {
     try {
@@ -48,12 +51,16 @@ routes.put(
   }
 );
 
-routes.delete('/:id', async (req, res, next) => {
-  try {
-    await studentsController.deleteStudent(req, res);
-  } catch (error) {
-    next(error);
+routes.delete(
+  '/:id',
+  isAuthenticated,
+  async (req, res, next) => {
+    try {
+      await studentsController.deleteStudent(req, res);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = routes;

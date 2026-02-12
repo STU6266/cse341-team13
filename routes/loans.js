@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const loansController = require('../controllers/loans');
 const validation = require('../middleware/validate');
+const isAuthenticated = require('../middleware/authenticate');
 
 routes.get('/', async (req, res, next) => {
   try {
@@ -20,7 +21,7 @@ routes.get('/:id', async (req, res, next) => {
   }
 });
 
-routes.post('/', validation.saveLoan, async (req, res, next) => {
+routes.post('/', isAuthenticated, validation.saveLoan, async (req, res, next) => {
   try {
     await loansController.createLoan(req, res);
   } catch (error) {
@@ -28,7 +29,7 @@ routes.post('/', validation.saveLoan, async (req, res, next) => {
   }
 });
 
-routes.put('/:id', validation.saveLoan, async (req, res, next) => {
+routes.put('/:id', isAuthenticated, validation.saveLoan, async (req, res, next) => {
   try {
     await loansController.updateLoan(req, res);
   } catch (error) {
@@ -36,7 +37,7 @@ routes.put('/:id', validation.saveLoan, async (req, res, next) => {
   }
 });
 
-routes.delete('/:id', async (req, res, next) => {
+routes.delete('/:id', isAuthenticated, async (req, res, next) => {
   try {
     await loansController.deleteLoan(req, res);
   } catch (error) {
