@@ -12,15 +12,28 @@ const getAllSchools = async (req, res) => {
 
 const getSchoolById = async (req, res) => {
     //#swagger.tags = ['Schools']
+
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json({ message: 'Invalid id' });
+        return;
+    }
+
     const schoolId = new ObjectId(req.params.id);
     const result = await mongodb
         .getDatabase()
         .db()
         .collection('schools')
         .findOne({ _id: schoolId });
+
+    if (!result) {
+        res.status(404).json({ message: 'Not found' });
+        return;
+    }
+
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
 };
+
 
 const createSchool = async (req, res) => {
     //#swagger.tags = ['Schools']  
