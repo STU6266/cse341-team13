@@ -1,3 +1,8 @@
+/*
+Render: https://cse341-team13-8amt.onrender.com
+GitHub: https://github.com/futureniyi/cse341-team13
+*/
+
 const express = require('express');
 const dotenv = require('dotenv').config();
 const mongodb = require('./data/database');
@@ -13,23 +18,37 @@ app.set('trust proxy', 1);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({ origin: '*', methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }));
 
-passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: process.env.GITHUB_CALLBACK_URL
-},
-(accessToken, refreshToken, profile, done) => {
-  return done(null, profile);
-}));
+const enableGithubOAuth =
+  process.env.NODE_ENV !== 'test' &&
+  process.env.GITHUB_CLIENT_ID &&
+  process.env.GITHUB_CLIENT_SECRET &&
+  process.env.GITHUB_CALLBACK_URL;
+
+if (enableGithubOAuth) {
+  passport.use(
+    new GitHubStrategy(
+      {
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL: process.env.GITHUB_CALLBACK_URL
+      },
+      (accessToken, refreshToken, profile, done) => {
+        return done(null, profile);
+      }
+    )
+  );
+}
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -61,12 +80,16 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
 });
 
-mongodb.initDb((err) => {
-  if (err) {
-    console.error(err);
-  } else {
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
-  }
-});
+if (process.env.NODE_ENV !== 'test') {
+  mongodb.initDb((err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+      });
+    }
+  });
+}
+
+module.exports = app;
